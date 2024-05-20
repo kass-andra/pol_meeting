@@ -51,11 +51,11 @@ def update_schedule(df, sums_df):
     with st.form(key='schedule_form'):
         selected_times = {}
         for date in dates:
-            st.write(f"### {date}")
-            cols = st.columns(len(times))
-            for i, time in enumerate(times):
-                col_key = (date, time)
-                selected_times[col_key] = cols[i].checkbox(time)
+             st.write(f"### {date}")
+             cols = st.columns(len(times))
+             for i, time in enumerate(times):
+                 col_key = (date, time)
+                 selected_times[col_key] = cols[i].checkbox(time, key=f"{date}-{time}")
         
         submitted = st.form_submit_button("Отправить")
 
