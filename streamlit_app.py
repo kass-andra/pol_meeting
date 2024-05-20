@@ -24,6 +24,7 @@ def update_schedule(df, sums_df):
     st.write("Выберите удобные временные интервалы:")
 
     with st.form(key='schedule_form'):
+        st.write(*times, sep='\t')
         selected_times = {}
         for date in dates:
              st.write(f"{date}")
