@@ -30,10 +30,10 @@ def update_schedule(df, sums_df):
              cols = st.columns(len(times))
              for i, time in enumerate(times):
                  col_key = (date, time)
-                  if i == 0:
-                      selected_times[col_key] = cols[i].checkbox(f'{date}: {time}', key=f"{date}-{time}")
-                  else:
-                      selected_times[col_key] = cols[i].checkbox(time, key=f"{date}-{time}")
+                 if i == 0:
+                     selected_times[col_key] = cols[i].checkbox(f'{date}: {time}', key=f"{date}-{time}")
+                 else:
+                     selected_times[col_key] = cols[i].checkbox(time, key=f"{date}-{time}")
         
         submitted = st.form_submit_button("Отправить")
 
