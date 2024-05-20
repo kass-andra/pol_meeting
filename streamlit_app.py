@@ -27,12 +27,13 @@ def update_schedule(df, sums_df):
         st.text("Время    \t      10-12   12-14   14-16   16-18   18-20   20-22   22-24")
         selected_times = {}
         for date in dates:
-             st.write(f"{date}")
+             
              cols = st.columns(len(times))
              for i, time in enumerate(times):
                  col_key = (date, time)
                  if i == 0:
-                     selected_times[col_key] = cols[i].checkbox(f'{date}: {time}', key=f"{date}-{time}")
+                     st.text(f"{date}")
+                     selected_times[col_key] = cols[i].checkbox('', key=f"{date}-{time}")
                  else:
                      selected_times[col_key] = cols[i].checkbox('', key=f"{date}-{time}")
         
