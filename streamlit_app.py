@@ -50,6 +50,63 @@ sums_df = pd.DataFrame(0, index=['Сумма'], columns=columns_sum)
 #     return df, sums_df
 
 
+# # Функция для отображения чекбоксов и обновления таблицы
+# def update_schedule(df, sums_df):
+#     st.title("Расписание собраний")
+#     st.write("Выберите удобные временные интервалы:")
+
+#     with st.form(key='schedule_form'):
+#         selected_times = {}
+
+#         # Отображение чекбоксов в виде таблицы
+#         st.write("<style>div.row-widget.stRadio>div{flex-direction:row;}</style>", unsafe_allow_html=True)
+#         st.write("<style>.main_container{display: flex; flex-direction: row;}</style>", unsafe_allow_html=True)
+#         st.write("<style>.widgetrow{display: flex; flex-direction: row;}</style>", unsafe_allow_html=True)
+#         st.write("<style>.widgetcol{display: flex; flex-direction: column;}</style>", unsafe_allow_html=True)
+
+#         st.write("<div class='main_container'>", unsafe_allow_html=True)
+#         st.write("<div class='widgetcol'>", unsafe_allow_html=True)
+
+#         # Заголовки столбцов
+#         st.write("<div class='widgetrow'>", unsafe_allow_html=True)
+#         st.write("<div class='widgetcol'></div>", unsafe_allow_html=True)
+#         for time in times:
+#             st.write(f"<div class='widgetcol'>{time}</div>", unsafe_allow_html=True)
+#         st.write("</div>", unsafe_allow_html=True)
+
+#         for date in dates:
+#             # Дата в качестве заголовка строки
+#             st.write("<div class='widgetrow'>", unsafe_allow_html=True)
+#             st.write(f"<div class='widgetcol'>{date}</div>", unsafe_allow_html=True)
+            
+#             # Чекбоксы для временных интервалов
+#             for time in times:
+#                 col_key = (date, time)
+#                 selected_times[col_key] = st.checkbox('', key=f'{date}-{time}')
+#                 st.write(f"<div class='widgetcol'>{selected_times[col_key]}</div>", unsafe_allow_html=True)
+            
+#             st.write("</div>", unsafe_allow_html=True)
+
+#         st.write("</div>", unsafe_allow_html=True)
+#         st.write("</div>", unsafe_allow_html=True)
+
+#         submitted = st.form_submit_button("Отправить")
+
+#     if submitted:
+#         new_row = []
+#         for col in df.columns:
+#             new_row.append(1 if selected_times[col] else 0)
+        
+#         # Добавляем новую строку в DataFrame данных
+#         df.loc[len(df)] = new_row
+
+#         # Обновляем суммы в DataFrame сумм
+#         sums_df.loc['Сумма'] = df.sum(axis=0)
+        
+#         st.success("Ваши данные были успешно обновлены!")
+        
+#     return df, sums_df
+
 # Функция для отображения чекбоксов и обновления таблицы
 def update_schedule(df, sums_df):
     st.title("Расписание собраний")
@@ -59,37 +116,13 @@ def update_schedule(df, sums_df):
         selected_times = {}
 
         # Отображение чекбоксов в виде таблицы
-        st.write("<style>div.row-widget.stRadio>div{flex-direction:row;}</style>", unsafe_allow_html=True)
-        st.write("<style>.main_container{display: flex; flex-direction: row;}</style>", unsafe_allow_html=True)
-        st.write("<style>.widgetrow{display: flex; flex-direction: row;}</style>", unsafe_allow_html=True)
-        st.write("<style>.widgetcol{display: flex; flex-direction: column;}</style>", unsafe_allow_html=True)
-
-        st.write("<div class='main_container'>", unsafe_allow_html=True)
-        st.write("<div class='widgetcol'>", unsafe_allow_html=True)
-
-        # Заголовки столбцов
-        st.write("<div class='widgetrow'>", unsafe_allow_html=True)
-        st.write("<div class='widgetcol'></div>", unsafe_allow_html=True)
-        for time in times:
-            st.write(f"<div class='widgetcol'>{time}</div>", unsafe_allow_html=True)
-        st.write("</div>", unsafe_allow_html=True)
-
         for date in dates:
-            # Дата в качестве заголовка строки
-            st.write("<div class='widgetrow'>", unsafe_allow_html=True)
-            st.write(f"<div class='widgetcol'>{date}</div>", unsafe_allow_html=True)
-            
-            # Чекбоксы для временных интервалов
-            for time in times:
+            st.write(f"## {date}")
+            cols = st.columns(len(times))
+            for i, time in enumerate(times):
                 col_key = (date, time)
-                selected_times[col_key] = st.checkbox('', key=f'{date}-{time}')
-                st.write(f"<div class='widgetcol'>{selected_times[col_key]}</div>", unsafe_allow_html=True)
-            
-            st.write("</div>", unsafe_allow_html=True)
-
-        st.write("</div>", unsafe_allow_html=True)
-        st.write("</div>", unsafe_allow_html=True)
-
+                selected_times[col_key] = cols[i].checkbox(time, key=f"{date}-{time}")
+        
         submitted = st.form_submit_button("Отправить")
 
     if submitted:
