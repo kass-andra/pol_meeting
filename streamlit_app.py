@@ -121,7 +121,12 @@ def update_schedule(df, sums_df):
             cols = st.columns(len(times))
             for i, time in enumerate(times):
                 col_key = (date, time)
-                selected_times[col_key] = cols[i].checkbox(time, key=f"{date}-{time}")
+                # Показываем чекбокс только в первом столбце
+                if i == 0:
+                    selected_times[col_key] = cols[i].checkbox(time, key=f"{date}-{time}")
+                else:
+                    # Пропускаем остальные столбцы
+                    cols[i].empty()
         
         submitted = st.form_submit_button("Отправить")
 
@@ -139,6 +144,7 @@ def update_schedule(df, sums_df):
         st.success("Ваши данные были успешно обновлены!")
         
     return df, sums_df
+
 
 
 # # Отображение текущего состояния таблицы данных
