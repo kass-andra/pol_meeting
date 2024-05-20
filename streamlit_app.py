@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from itertools import product
 
 
 dates = ["24 мая (пт)", "25 мая (сб)", "26 мая (вс)", "27 мая (пн)", "28 мая (вт)", 
