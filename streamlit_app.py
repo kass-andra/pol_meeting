@@ -9,13 +9,13 @@ dates = ["24 мая (пт)", "25 мая (сб)", "26 мая (вс)", "27 мая 
 times = ["10-12", "12-14", "14-16", "16-18", "18-20", "20-22", "22-24"]
 
 columns = pd.MultiIndex.from_product([dates, times])
-columns_sum = 
+columns_sum = ['\n'.join(col) for col in product(dates, times)]
 
 # Создаем пустой DataFrame с мультииндексом колонок для данных
 df = pd.DataFrame(columns=columns)
 
 # Создаем пустой DataFrame с мультииндексом колонок для сумм
-sums_df = pd.DataFrame(0, index=['Сумма'], columns=columns)
+sums_df = pd.DataFrame(0, index=['Сумма'], columns=columns_sum)
 
 # # Функция для отображения чекбоксов и обновления таблицы
 # def update_schedule(df, sums_df):
