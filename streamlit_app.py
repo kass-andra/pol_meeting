@@ -51,7 +51,7 @@ def update_schedule(df, sums_df):
     with st.form(key='schedule_form'):
         selected_times = {}
         for date in dates:
-            st.write(date)
+            st.write(f"### {date}")
             cols = st.columns(len(times))
             for i, time in enumerate(times):
                 col_key = (date, time)
@@ -73,6 +73,7 @@ def update_schedule(df, sums_df):
         st.success("Ваши данные были успешно обновлены!")
         
     return df, sums_df
+
 
 # Отображение текущего состояния таблицы данных
 st.write("Текущее состояние таблицы:")
